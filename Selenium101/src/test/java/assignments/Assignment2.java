@@ -2,17 +2,12 @@ package assignments;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -52,6 +47,7 @@ public class Assignment2 {
 	
 	@Test
 	public void test() throws InterruptedException {
+		driver.manage().window().maximize();
 		driver.get("https://www.testmuai.com/selenium-playground/");
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//*[text()='Drag & Drop Sliders']")).click();

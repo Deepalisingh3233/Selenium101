@@ -50,6 +50,7 @@ public class Assignment1 {
 	
 	@Test
 	public void test() throws InterruptedException {
+		driver.manage().window().maximize();
 		driver.get("https://www.testmuai.com/selenium-playground/");
 		Thread.sleep(1000);
 		driver.findElement(By.xpath("//*[text()='Simple Form Demo']")).click();
