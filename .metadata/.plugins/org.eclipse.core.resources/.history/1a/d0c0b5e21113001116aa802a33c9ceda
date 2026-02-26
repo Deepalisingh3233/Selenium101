@@ -1,0 +1,87 @@
+package assignments;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Assignment2 {
+
+	String username = "deepali7289";
+	String accesskey = "LT_pRcoMI6uUCV3qQwz8BoTVSh8tcKQb6ISiTlUgbF73UJSdgO";
+	String gridURL = "@hub.lambdatest.com/wd/hub";
+	WebDriver driver;
+
+	@BeforeTest
+	public void setUp() {
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+	}
+	
+//	public void setUp() {
+//		ChromeOptions browserOptions = new ChromeOptions();
+//		browserOptions.setPlatformName("Windows 10");
+//		browserOptions.setBrowserVersion("dev");
+//		HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+//		ltOptions.put("username", username);
+//		ltOptions.put("accessKey", accesskey);
+//		ltOptions.put("visual", true);
+//		ltOptions.put("video", true);
+//		ltOptions.put("network", true);
+//		ltOptions.put("project", "Simple Form Demo");
+//		ltOptions.put("console", "true");
+//		ltOptions.put("selenium_version", "4.0.0");
+//		ltOptions.put("w3c", true);
+//		browserOptions.setCapability("LT:Options", ltOptions);
+//		try {
+//			driver = new RemoteWebDriver(new URL("https://" + username + ":" + accesskey + gridURL), browserOptions);
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	@Test
+	public void test() throws InterruptedException {
+		driver.get("https://www.testmuai.com/selenium-playground/");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[text()='Drag & Drop Sliders']")).click();
+		WebElement slider = driver.findElement(By.cssSelector("div#slider3>div>input"));
+		 String minValue = slider.getAttribute("min");  // e.g., 0
+         String maxValue = slider.getAttribute("max");  // e.g., 100
+         int min = Integer.parseInt(minValue); 
+         int max = Integer.parseInt(maxValue); 
+         
+         // Step 5: Calculate the slider range
+         int range = max - min; // In this case, 100 (100 - 0)
+         
+         // Step 6: Target value (e.g., 95)
+         int targetValue = 95;
+         
+         // Step 7: Calculate the proportional offset
+         int targetOffset = (int) (((double) targetValue / range) * slider.getSize().width);
+         
+         // Step 8: Calculate the slider's width (used for drag offset calculation)
+         int sliderWidth = slider.getSize().width;
+         
+         // Step 9: Use Actions class to drag the slider to the target value
+         Actions actions = new Actions(driver);
+         actions.clickAndHold(slider)
+                .moveByOffset(targetOffset, 0)  // Move slider to the calculated offset for the target value
+                .release()
+                .perform();
+	}
+	
+	@AfterTest
+	public void tearDown() {
+//		driver.close();
+	}
+}

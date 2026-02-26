@@ -1,0 +1,79 @@
+package assignments;
+
+import static org.testng.Assert.assertEquals;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Assignment1 {
+	String username = "deepali7289";
+	String accesskey = "LT_pRcoMI6uUCV3qQwz8BoTVSh8tcKQb6ISiTlUgbF73UJSdgO";
+	String gridURL = "@hub.lambdatest.com/wd/hub";
+	WebDriver driver;
+
+	@BeforeTest
+	public void setUp() {
+		driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+	}
+	
+//	public void setUp() {
+//		ChromeOptions browserOptions = new ChromeOptions();
+//		browserOptions.setPlatformName("Windows 10");
+//		browserOptions.setBrowserVersion("dev");
+//		HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+//		ltOptions.put("username", username);
+//		ltOptions.put("accessKey", accesskey);
+//		ltOptions.put("visual", true);
+//		ltOptions.put("video", true);
+//		ltOptions.put("network", true);
+//		ltOptions.put("project", "Simple Form Demo");
+//		ltOptions.put("console", "true");
+//		ltOptions.put("selenium_version", "4.0.0");
+//		ltOptions.put("w3c", true);
+//		browserOptions.setCapability("LT:Options", ltOptions);
+//		try {
+//			driver = new RemoteWebDriver(new URL("https://" + username + ":" + accesskey + gridURL), browserOptions);
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	@Test
+	public void test() throws InterruptedException {
+		driver.get("https://www.testmuai.com/selenium-playground/");
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//*[text()='Simple Form Demo']")).click();
+		String currentURL = driver.getCurrentUrl();
+		String actualURL = "simple-form-demo";
+		Assert.assertTrue(currentURL.contains(actualURL));
+		
+		String text = "Welcome to TestMu AI";
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//input[@placeholder='Please enter your Message']")).sendKeys(text);
+		Thread.sleep(2000);
+		driver.findElement(By.id("showInput")).click();
+		
+		String value = driver.findElement(By.id("message")).getText();
+		Assert.assertEquals(value, text);
+	}
+	
+	@AfterTest
+	public void tearDown() {
+//		driver.close();
+	}
+}

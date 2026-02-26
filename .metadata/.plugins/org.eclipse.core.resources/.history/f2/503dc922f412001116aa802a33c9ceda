@@ -1,0 +1,42 @@
+package assignments;
+
+import static org.testng.Assert.assertEquals;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class Assignment1 {
+	
+	WebDriver driver;
+
+	@BeforeTest
+	public void setUp() {
+		driver = new ChromeDriver();
+		driver.get("https://www.testmuai.com/selenium-playground/");
+	}
+	
+	@Test
+	public void test() {
+		driver.findElement(By.linkText("Simple Form Demo")).click();
+		String currentURL = driver.getCurrentUrl();
+		String actualURL = "simple-form-demo";
+		Assert.assertTrue(currentURL.contains(actualURL));
+		
+		String text = "Welcome to TestMu AI";
+		driver.findElement(By.id("user-message")).sendKeys(text);
+		driver.findElement(By.id("showInput")).click();
+		
+		String value = driver.findElement(By.id("message")).getText();
+		Assert.assertEquals(value, text);
+	}
+	
+	@AfterTest
+	public void tearDown() {
+//		driver.close();
+	}
+}
