@@ -1,5 +1,9 @@
 package assignments;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
@@ -21,6 +25,7 @@ public class Assignment2 {
 	String gridURL = "@hub.lambdatest.com/wd/hub";
 	RemoteWebDriver driver;
 
+	@BeforeMethod
 	@BeforeTest
 	public void setUp() {
 		ChromeOptions browserOptions = new ChromeOptions();
@@ -66,9 +71,10 @@ public class Assignment2 {
       WebElement rangeValue = driver.findElement(By.id("rangeSuccess"));
       String valueText = rangeValue.getText();
       
-      Assert.assertEquals(valueText, "95");
+      AssertJUnit.assertEquals(valueText, "95");
 	}
 	
+	@AfterMethod
 	@AfterTest
 	public void tearDown() {
 		driver.close();

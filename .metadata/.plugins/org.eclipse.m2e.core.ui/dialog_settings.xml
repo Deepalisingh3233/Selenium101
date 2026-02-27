@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="/home/unicode/Music/Assignment"/>
 			<item value="/home/unicode/eclipse-workspace"/>
 		</list>
 		<list key="projectNameTemplate">
@@ -45,10 +46,18 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="Selenium101"/>
+			<item value="ABS"/>
+			<item value="SeleniumTest"/>
 		</list>
 		<list key="name">
+			<item value="ABS"/>
+			<item value="SeleniumTest"/>
 		</list>
 		<list key="artifactId">
+			<item value="Selenium101"/>
+			<item value="ABS"/>
+			<item value="SeleniumTest"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

@@ -1,5 +1,9 @@
 package assignments;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.AssertJUnit;
 import static org.testng.Assert.assertEquals;
 
 import java.net.MalformedURLException;
@@ -24,6 +28,7 @@ public class Assignment1 {
 	String gridURL = "@hub.lambdatest.com/wd/hub";
 	RemoteWebDriver driver;
 
+	@BeforeMethod
 	@BeforeTest
 	public void setUp() {
 		ChromeOptions browserOptions = new ChromeOptions();
@@ -56,7 +61,7 @@ public class Assignment1 {
 		driver.findElement(By.xpath("//*[text()='Simple Form Demo']")).click();
 		String currentURL = driver.getCurrentUrl();
 		String actualURL = "simple-form-demo";
-		Assert.assertTrue(currentURL.contains(actualURL));
+		AssertJUnit.assertTrue(currentURL.contains(actualURL));
 		String text = "Welcome to TestMu AI";
 		Thread.sleep(2000);
 		driver.findElement(By.xpath("//input[@placeholder='Please enter your Message']")).sendKeys(text);
@@ -64,9 +69,10 @@ public class Assignment1 {
 		driver.findElement(By.id("showInput")).click();
 		
 		String value = driver.findElement(By.id("message")).getText();
-		Assert.assertEquals(value, text);
+		AssertJUnit.assertEquals(value, text);
 	}
 	
+	@AfterMethod
 	@AfterTest
 	public void tearDown() {
 		driver.close();
